@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { IncentiveMoney, InputAttendance } from "./index"
 
 
 const InputFlex = styled.div`
@@ -9,7 +10,7 @@ const InputFlex = styled.div`
 `;
 
 
-export const CalcInput = () => {
+export const CalcAll = () => {
 
   //학원 가는 횟수 state
   const [attendanceAcademy, setAttendanceAcademy] = useState<number>(0);
@@ -109,29 +110,6 @@ export const CalcInput = () => {
   const absent = Number((getMinusValue() * 1 / 3).toFixed(1)) + getAbsentValue();
 
 
-  //훈련장려금을 받을 수 있을까?
-
-  const incentiveMoney = () => {
-
-    if (attendancePercentage < 80) {
-      return (
-        <p style={{ color: '#B71C1C' }}>80% 미만이어서 훈련장려금을 받을 수 없어요. ㅠㅠ</p>
-      );
-    }
-
-    else if (attendancePercentage === 80) {
-      return (
-        <p style={{ color: '#FFD600' }}>80% 아슬아슬해요. (주의! 전산 오류가 나면 훈련장려금 미지급 될 수 있어요!)</p>
-      );
-    }
-
-    else if (attendancePercentage > 80) {
-      return (
-        <p style={{ color: '#00C853' }}>80% 이상이어서 훈련장려금을 받을 수 있어요!</p>
-      );
-
-    }
-  }
 
 
   return (
@@ -139,11 +117,8 @@ export const CalcInput = () => {
 
 
       <div>
-        <p>이번 달 또는 전체 기간 중 학원 가는 횟수를 입력해주세요</p>
 
-        <InputFlex>
-          <input className='input1' type="text" aria-label="input_number" defaultValue={''} placeholder='ex) 20' onChange={attendanceInputChange} ref={refAttendanceInput} />
-        </InputFlex>
+        <InputAttendance attendanceInputChange={attendanceInputChange} refAttendanceInput={refAttendanceInput} ></InputAttendance>
 
         <p>이번 달 조퇴/지각/외출의 총 합을 입력해주세요</p>
 
@@ -170,7 +145,7 @@ export const CalcInput = () => {
         <p onChange={absentChange}>현재 출석일수는 {calcAttendance()}일 ({attendancePercentage}%) 입니다</p>
         <p onChange={absentChange}>{numberCalc2()}% 중 {minusPercentage}% 차감되었습니다.</p>
         <p onChange={absentChange}>결석일수는 총 {absent}일 이에요.</p>
-        {incentiveMoney()}
+        < IncentiveMoney attendancePercentage={attendancePercentage} />
       </div>
 
     </div>
