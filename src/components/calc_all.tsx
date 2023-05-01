@@ -1,13 +1,6 @@
 import { useState, useRef } from 'react';
-import styled from 'styled-components';
-import { IncentiveMoney, InputAttendance } from "./index"
+import { InputAttendance, InputMinus, InputAbsent, AttendanceInfo, AbsentInfo } from "./index"
 
-
-const InputFlex = styled.div`
-
-  display: flex;
-
-`;
 
 
 export const CalcAll = () => {
@@ -43,7 +36,7 @@ export const CalcAll = () => {
   //총 출석일 대비 1일의 %계산
   const numberCalc = (): number => Number((1 / attendanceAcademy * 100).toFixed(3));
   //총 출석일의 %계산 (당연한 거지만 100%로 고정되어 있음)
-  const numberCalc2 = (): number => Number((numberCalc() * attendanceAcademy).toFixed(0));
+  const percentageCalc = (): number => Number((numberCalc() * attendanceAcademy).toFixed(0));
   //80%가 될 때 일수의 계산
   const getMoney = (): number => attendanceAcademy * (4 / 5);
 
@@ -104,49 +97,40 @@ export const CalcAll = () => {
   const attendancePercentage = Number(((calcAttendance() / getAttendanceValue()) * 100).toFixed(3));
 
   // 전체출석% - 빠진날% 
-  const minusPercentage = Number((numberCalc2() - attendancePercentage).toFixed(3));
+  const minusPercentage = Number((percentageCalc() - attendancePercentage).toFixed(3));
 
   // 결석일수 계산
   const absent = Number((getMinusValue() * 1 / 3).toFixed(1)) + getAbsentValue();
 
 
+  //념겨줄 props의 양이 많아서 묶음처리
+  const absentInfoProps = {
+    minusTime: minusTime,
+    absentChange: absentChange,
+    calcAttendance: calcAttendance,
+    attendancePercentage: attendancePercentage,
+    percentageCalc: percentageCalc,
+    minusPercentage: minusPercentage,
+    absent: absent,
+  };
 
 
   return (
     <div style={{ marginLeft: '20px' }}>
 
-
       <div>
 
-        <InputAttendance attendanceInputChange={attendanceInputChange} refAttendanceInput={refAttendanceInput} ></InputAttendance>
+        <InputAttendance attendanceInputChange={attendanceInputChange} refAttendanceInput={refAttendanceInput} />
 
-        <p>이번 달 조퇴/지각/외출의 총 합을 입력해주세요</p>
+        <InputMinus minusAttendance={minusAttendance} refMinusInput={refMinusInput} />
 
-        <InputFlex>
-          <input type="text" aria-label="input_number" defaultValue={''} placeholder='ex) 3' onChange={minusAttendance} ref={refMinusInput} />
-        </InputFlex>
-
-
-        <p>이번 달 결석 수를 입력해주세요</p>
-
-        <InputFlex>
-          <input type="text" aria-label="input_number" defaultValue={''} placeholder='ex) 없으면 입력 x, 숫자만!' onChange={absentChange} ref={refAbsent} />
-        </InputFlex>
+        <InputAbsent absentChange={absentChange} refAbsent={refAbsent} />
 
       </div>
 
-      <div style={{ display: attendanceAcademy ? 'block' : 'none' }}>
-        <p>1일 = {numberCalc()}% 입니다</p>
-        <p>{attendanceAcademy}일 = {numberCalc2()}% 입니다</p>
-        <p>총 80%가 되려면 {getMoney()}일을 출석해야 합니다.</p>
-      </div>
+      <AttendanceInfo attendanceAcademy={attendanceAcademy} numberCalc={numberCalc} percentageCalc={percentageCalc} getMoney={getMoney} />
 
-      <div style={{ display: minusTime ? 'block' : 'none' }} >
-        <p onChange={absentChange}>현재 출석일수는 {calcAttendance()}일 ({attendancePercentage}%) 입니다</p>
-        <p onChange={absentChange}>{numberCalc2()}% 중 {minusPercentage}% 차감되었습니다.</p>
-        <p onChange={absentChange}>결석일수는 총 {absent}일 이에요.</p>
-        < IncentiveMoney attendancePercentage={attendancePercentage} />
-      </div>
+      <AbsentInfo {...absentInfoProps} />
 
     </div>
 
