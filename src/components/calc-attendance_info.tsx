@@ -1,3 +1,18 @@
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import styled from "styled-components";
+import { Attendance100Percent, OneDayPercentage, Attendance80Percent } from "./";
+
+const FlexDiv = styled.div`
+
+margin: 20px 30px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+`;
+
 interface AttendanceInfoProps {
 
   attendanceAcademy: number;
@@ -9,10 +24,21 @@ interface AttendanceInfoProps {
 
 export const AttendanceInfo = ({ attendanceAcademy, numberCalc, percentageCalc, getMoney }: AttendanceInfoProps) => {
   return (
-    <div style={{ display: attendanceAcademy ? 'block' : 'none' }}>
-      <p>1일 = {numberCalc()}% 입니다</p>
-      <p>{attendanceAcademy}일 = {percentageCalc()}% 입니다</p>
-      <p>총 80%가 되려면 {getMoney()}일을 출석해야 합니다.</p>
+    <div style={{
+      display: attendanceAcademy ? 'block' : 'none',
+      width: '100%',
+      background: 'linear-gradient(160deg, #000000df 0%, #060B28 100%)',
+      borderRadius: '10px',
+      padding: '1px',
+    }}>
+
+      <FlexDiv>
+        <OneDayPercentage numberCalc={numberCalc} />
+        <Attendance100Percent percentageCalc={percentageCalc} attendanceAcademy={attendanceAcademy} />
+        <Attendance80Percent getMoney={getMoney} />
+      </FlexDiv>
+
+
     </div>
   );
 }
