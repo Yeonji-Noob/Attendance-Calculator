@@ -10,3 +10,8 @@ export { AbsentInfo } from "./calc-absent_info";
 export { Attendance100Percent } from "./calc--attendance_100percent";
 export { OneDayPercentage } from "./calc--attendance_oneday_percent";
 export { Attendance80Percent } from "./calc--attendance_80percent";
+
+
+export { CurrentAttendance } from "./calc--absent_current";
+export { AbsentAllDay } from "./calc--absent_allday";
+export { MinusDay } from "./calc--absent_minus";

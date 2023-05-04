@@ -2,6 +2,8 @@
 // import viteLogo from '/vite.svg'
 import { CalcAll } from "./components/calc_all"
 import styled from "styled-components";
+import GlobalFont from "./styles/GlobalFont";
+import GlobalStyles from "./styles/GlobalStyles";
 
 const BackgroundDiv = styled.div`
 
@@ -10,8 +12,6 @@ height: 100vh;
 background: rgb(0,98,247);
 background: radial-gradient(circle, rgba(0,98,247,1) 0%, #0535b9 51%, #272727 96%);
 overflow: hidden;
-font-family: 'SUIT Variable';
-font-size: 12px;
 
 `;
 
@@ -19,6 +19,8 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
+      <GlobalFont />
       <BackgroundDiv>
         <CalcAll />
       </BackgroundDiv>

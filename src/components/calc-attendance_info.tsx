@@ -1,6 +1,3 @@
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import styled from "styled-components";
 import { Attendance100Percent, OneDayPercentage, Attendance80Percent } from "./";
 

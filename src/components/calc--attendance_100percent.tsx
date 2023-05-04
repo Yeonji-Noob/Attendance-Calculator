@@ -16,7 +16,11 @@ align-items: center;
 
 `;
 
+
+
 export const Attendance100Percent = ({ percentageCalc, attendanceAcademy }: Attendance100Props) => {
+
+
   return (
     <PercentDiv>
       <Box sx={{ position: 'relative', display: 'inline-flex', marginTop: '15px' }}>

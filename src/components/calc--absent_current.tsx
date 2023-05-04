@@ -3,10 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 
-interface OneDayPerProps {
-  numberCalc: () => number;
-}
-
 const PercentDiv = styled.div`
 
 display: flex;
@@ -15,17 +11,24 @@ align-items: center;
 
 `;
 
-export const OneDayPercentage = ({ numberCalc }: OneDayPerProps) => {
+interface CurrentAttendanceProps {
+  absentChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  calcAttendance: () => number;
+  attendancePercentage: number;
+}
+
+export const CurrentAttendance = ({ absentChange, calcAttendance, attendancePercentage }: CurrentAttendanceProps) => {
+
   return (
     <PercentDiv>
       <Box sx={{ position: 'relative', display: 'inline-flex', marginTop: '15px' }}>
-        <CircularProgress variant="determinate" value={numberCalc()} size={100} thickness={1.5} style={{ zIndex: '99', color: '#FF7D0A' }} />
+        <CircularProgress variant="determinate" value={attendancePercentage} size={100} thickness={1.5} style={{ zIndex: '99' }} />
         <CircularProgress
           variant="determinate"
           value={100}
           className={"background"}
           size={100}
-          style={{ position: 'absolute', color: '#5c2e06' }}
+          style={{ position: 'absolute', color: '#052F6D' }}
           thickness={1.5}
         />
 
@@ -46,10 +49,12 @@ export const OneDayPercentage = ({ numberCalc }: OneDayPerProps) => {
             component="div"
             color="#ffffff"
             fontSize={20}
-          >{`${numberCalc()}%`}</Typography>
+          >{`${attendancePercentage}%`}</Typography>
         </Box>
       </Box>
-      <p>1일 = {numberCalc()}%</p>
+      <p onChange={absentChange}>현 출석일수 = {calcAttendance()}일 ({attendancePercentage}%)</p>
     </PercentDiv>
+
   );
-};
+
+}
