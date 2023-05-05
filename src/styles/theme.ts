@@ -24,6 +24,7 @@ interface InputText {
   borderRadius: string;
   padding: string;
   marginLeft: string;
+  color: string;
 }
 
 interface Theme {
@@ -61,6 +62,7 @@ const inputText: InputText = {
   borderRadius: '5px',
   padding: '5px',
   marginLeft: '5px',
+  color: 'white',
 };
 
 // theme 객체에 감싸서 한꺼번에 반환

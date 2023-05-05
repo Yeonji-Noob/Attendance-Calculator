@@ -26,6 +26,7 @@ const InputText = styled.input`
   border-radius: ${({ theme }) => theme.inputText.borderRadius};
   padding: ${({ theme }) => theme.inputText.padding};
   margin-left: ${({ theme }) => theme.inputText.marginLeft};
+  color: ${({ theme }) => theme.inputText.color};
 
 `;
 
