@@ -14,6 +14,7 @@ export default createGlobalStyle`
     }
     body{
         font-family: 'SUIT Variable'; // 폰트 설정
+        color: white;
     }
     a{
         color: inherit;
