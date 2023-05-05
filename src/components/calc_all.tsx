@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { InputAttendance, InputMinus, InputAbsent, AttendanceInfo, AbsentInfo } from "./index"
 import styled from 'styled-components';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 
 // 가장 큰 div 박스
@@ -170,12 +171,16 @@ export const CalcAll = () => {
 
   return (
     <StyleDiv>
+
       <TitleText>
         <CalculateIcon />
         <p>출결 계산기</p>
         <CalculateIcon />
-      </TitleText>
 
+      </TitleText>
+      <a href='https://github.com/Yeonji-Noob/Attendance-Calculator' target='_blank' >
+        <GitHubIcon style={{ position: 'absolute', top: '20px', right: '20px', cursor: 'pointer' }} fontSize='large' ></GitHubIcon>
+      </a>
       <div className='input-div'>
 
         <InputAttendance attendanceInputChange={attendanceInputChange} refAttendanceInput={refAttendanceInput} />
