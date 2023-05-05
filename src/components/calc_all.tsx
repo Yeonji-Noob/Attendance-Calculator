@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import CalculateIcon from '@mui/icons-material/Calculate';
 
 
+// 가장 큰 div 박스
 const StyleDiv = styled.div`
 position: absolute;
 width: 420px;
@@ -14,10 +15,26 @@ padding: 20px;
 border-radius: 10px;
 background: linear-gradient(160deg, #000000df 0%, #00326e 100%);
 box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
--webkit-backdrop-filter: blur(9.6px);
 border: 1px solid rgba(0, 31, 70, 0.51);
-line-height: 40px;
+line-height: 35px;
 font-size: 13px;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 300px;
+    font-size: 12px;
+  }
+
+  @media ${({ theme }) => theme.small} {
+    width: 277px;
+    padding: 10px;
+    margin: 0 20px;
+  }
+
+  @media (max-height: 715px) {
+    top: 0;
+    margin-top: 58vh;
+  }
+
 `;
 
 const TitleText = styled.div`
@@ -72,7 +89,7 @@ export const CalcAll = () => {
   //총 출석일의 %계산 (당연한 거지만 100%로 고정되어 있음)
   const percentageCalc = (): number => Number((numberCalc() * attendanceAcademy).toFixed(0));
   //80%가 될 때 일수의 계산
-  const getMoney = (): number => attendanceAcademy * (4 / 5);
+  const getMoney = (): number => Number((attendanceAcademy * (4 / 5)).toFixed(3));
 
 
   // value 값을 선택하기 위한 useRef
@@ -122,7 +139,7 @@ export const CalcAll = () => {
     const total = getAttendanceValue();
     const attendance = Number((getMinusValue() * 1 / 3).toFixed(1));
 
-    return total - attendance - getAbsentValue();
+    return Number((total - attendance - getAbsentValue()).toFixed(3));
   };
 
 
@@ -158,7 +175,8 @@ export const CalcAll = () => {
         <p>출결 계산기</p>
         <CalculateIcon />
       </TitleText>
-      <div>
+
+      <div className='input-div'>
 
         <InputAttendance attendanceInputChange={attendanceInputChange} refAttendanceInput={refAttendanceInput} />
 

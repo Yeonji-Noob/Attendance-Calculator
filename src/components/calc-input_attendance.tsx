@@ -1,17 +1,42 @@
+import styled from 'styled-components';
+
 interface AttendanceProps {
   attendanceInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   refAttendanceInput: React.RefObject<HTMLInputElement>;
 }
 
+const InputBox = styled.div`
+
+  display: ${({ theme }) => theme.inputBox.display};
+  align-items: ${({ theme }) => theme.inputBox.alignItems};
+
+
+  @media ${({ theme }) => theme.mobile} {
+      flex-direction: column;
+  }
+`;
+
+const InputText = styled.input`
+
+  width: 50px; 
+  height: ${({ theme }) => theme.inputText.height};
+  background-color: ${({ theme }) => theme.inputText.backgroundColor};
+  border: ${({ theme }) => theme.inputText.border}; 
+  border-radius: ${({ theme }) => theme.inputText.borderRadius};
+  padding: ${({ theme }) => theme.inputText.padding};
+  margin-left: ${({ theme }) => theme.inputText.marginLeft};
+
+`;
+
+
+
 export const InputAttendance = ({ attendanceInputChange, refAttendanceInput }: AttendanceProps) => {
 
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <p>이번 달 또는 전체 기간 중 학원 가는 횟수를 입력해주세요</p>
-      <input className='input1' type="text" aria-label="input_number" defaultValue={''} placeholder='ex) 20' onChange={attendanceInputChange} ref={refAttendanceInput}
-        style={{ width: '50px', height: '20px', backgroundColor: '#ffffff2b', border: 'solid 1px #000000', borderRadius: '5px', padding: '5px', marginLeft: '5px' }}
-      />
-    </div>
+    <InputBox>
+      <p>이번 달 학원 가는 횟수를 입력해주세요</p>
+      <InputText type="text" aria-label="input_number" defaultValue={''} placeholder='ex) 20' onChange={attendanceInputChange} ref={refAttendanceInput} />
+    </InputBox>
   );
 }

@@ -7,6 +7,6 @@ interface MinusDayProps {
 
 export const MinusDay = ({ absentChange, percentageCalc, minusPercentage }: MinusDayProps) => {
   return (
-    <p onChange={absentChange} style={{ textAlign: 'center' }}>{percentageCalc()}% 중 <strong style={{ fontSize: '18px', fontWeight: '600' }}>-{minusPercentage}%</strong></p>
+    <p onChange={absentChange} style={{ textAlign: 'center' }}>{percentageCalc()}% 중 <strong style={{ fontSize: '16px', fontWeight: '600' }}>-{minusPercentage}%</strong></p>
   );
 }

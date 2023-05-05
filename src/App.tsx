@@ -8,9 +8,10 @@ import GlobalStyles from "./styles/GlobalStyles";
 const BackgroundDiv = styled.div`
 
 width: 100vw;
-height: 100vh;
+height: 100vh; 
 background: rgb(0,98,247);
 background: radial-gradient(circle, rgba(0,98,247,1) 0%, #0535b9 51%, #272727 96%);
+background-size: cover;
 overflow: hidden;
 
 `;
