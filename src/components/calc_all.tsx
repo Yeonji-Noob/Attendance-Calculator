@@ -12,6 +12,7 @@ width: 420px;
 top: 50%;
 left: 50%;
 transform: translate(-50% ,-50%);
+margin-bottom: 12vw;
 padding: 20px;
 border-radius: 10px;
 background: linear-gradient(160deg, #000000df 0%, #00326e 100%);
@@ -31,7 +32,7 @@ font-size: 13px;
     margin: 0 20px;
   }
 
-  @media (max-height: 715px) {
+  @media (max-height: 600px) {
     top: 0;
     margin-top: 58vh;
   }
